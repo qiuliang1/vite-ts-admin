@@ -1,10 +1,4 @@
-import {
-  createRouter,
-  createWebHashHistory,
-  RouteRecordRaw,
-  RouteLocationNormalized,
-  NavigationGuardNext
-} from 'vue-router'
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import { LAYOUT } from './constant'
 
 const routes: RouteRecordRaw[] = [
