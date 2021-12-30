@@ -1,11 +1,11 @@
 language: node_js  # 设置语言
 
 node_js:
-  - 14.17.6 # 指定node.js版本
+  - 16.13.1 # 指定node.js版本
 
 cache: yarn # 开启缓存
 
 install:
-  - npm
+  - yarn
 script:
   - yarn build
