@@ -15,8 +15,8 @@ export default defineComponent({
   setup() {
     const data = reactive<{ user: IUser }>({
       user: {
-        username: '',
-        password: ''
+        username: 'admin',
+        password: '123456'
       }
     })
     const router = useRouter()
@@ -28,7 +28,7 @@ export default defineComponent({
         if (valid) {
           if (data.user.username === 'admin' && data.user.password === '123456') {
             router.push({
-              name: ''
+              name: 'Analysis'
             })
           }
         }
@@ -60,7 +60,7 @@ export default defineComponent({
           </ElFormItem>
           <ElFormItem>
             <ElButton type="primary" onClick={login}>
-              提 交
+              提交
             </ElButton>
           </ElFormItem>
         </ElForm>

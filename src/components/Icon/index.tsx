@@ -1,4 +1,4 @@
-import { defineComponent, h, watch } from 'vue'
+import { defineComponent, h } from 'vue'
 import * as IconComponent from '@element-plus/icons'
 import { ElIcon } from 'element-plus'
 
@@ -22,9 +22,7 @@ export default defineComponent({
   },
   setup(props) {
     let iconName = ''
-    watch(props, () => {
-      iconName = props.iconName as string
-    })
+    iconName = props.iconName as string
 
     return () => (
       <ElIcon size={props.size} color={props.color}>

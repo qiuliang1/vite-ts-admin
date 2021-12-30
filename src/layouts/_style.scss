@@ -1,0 +1,75 @@
+// reset element component
+.el-aside {
+  width: auto;
+  overflow-x: hidden;
+  background-color: #61a1ff;
+}
+
+.el-menu {
+  border: none;
+}
+
+.el-menu-vertical-custom:not(.el-menu--collapse) {
+  width: 210px;
+}
+
+.el-header {
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.el-breadcrumb {
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+
+// private
+.lx-logo {
+  display: flex;
+  align-items: center;
+  padding-left: 7px;
+  cursor: pointer;
+  // transition: all .2s ease;
+  color: #fff;
+  position: relative;
+
+  .lx-logo-img {
+    height: 48px;
+    padding: 10px 4px 10px 10px;
+  }
+
+  .lx-logo-title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: normal;
+    overflow: hidden;
+    position: absolute;
+    left: 54px;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .trans {
+    transition:all 2s;
+  }
+}
+
+.lx-head-icon {
+  display: flex;
+  height: 100%;
+  padding: 1px 10px 8px;
+  cursor: pointer;
+  align-items: center;
+  &:hover {
+    background-color: #f6f6f6;
+  }
+}
+
+.lx-rotate {
+  transform: rotate(180deg)
+}
