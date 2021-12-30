@@ -6,6 +6,6 @@ node_js:
 cache: yarn # 开启缓存
 
 install:
-  - yarn
+  - npm
 script:
   - yarn build
