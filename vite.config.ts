@@ -3,6 +3,8 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import styleImport from 'vite-plugin-style-import'
+import alias from '@rollup/plugin-alias'
+import ElementPlus from 'unplugin-element-plus/vite'
 
 // https://vitejs.dev/config/
 export default ({ mode }) =>
@@ -10,6 +12,8 @@ export default ({ mode }) =>
     plugins: [
       vue(),
       vueJsx(),
+      alias(),
+      ElementPlus({}),
       styleImport({
         libs: [
           {
@@ -26,6 +30,13 @@ export default ({ mode }) =>
         ]
       })
     ],
+    build: {
+      rollupOptions: {
+        external: [
+          'element-plus' // ignore react stuff
+        ]
+      }
+    },
     base: mode === 'development' ? '/' : './', //此时把环境打包路径也配置好，避免生产环境打包出现白屏
     server: {
       port: 8888
