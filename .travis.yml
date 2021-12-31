@@ -7,8 +7,8 @@ branches:
 cache:
   apt: true
   yarn: true
-  directories: 
-    - node_modules #缓存依赖
+  directories:
+  - node_modules
 addons:
   ssh_known_hosts:
   - 101.35.190.75
@@ -19,10 +19,7 @@ script:
 before_install:
 - openssl aes-256-cbc -K $encrypted_0894cc22e6b1_key -iv $encrypted_0894cc22e6b1_iv
   -in id_rsa.enc -out ~\/.ssh/id_rsa -d
-# - eval "$(ssh-agent -s)"
-- chmod 600 ~\/.ssh/id_rsa # 降低 id_rsa 文件的权限
-- echo -e "Host 101.35.190.75\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config # 将生产服务器地址加入到测试机的信任列表中
-# - chmod 600 .ssh/authorized_keys
-# - ssh-add .ssh/authorized_keys
+- chmod 600 ~\/.ssh/id_rsa
+- echo -e "Host 101.35.190.75\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 after_success:
 - rsync -az --delete ./dist/* root@101.35.190.75:/home/nginx/www/qx-admin
