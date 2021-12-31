@@ -3,8 +3,6 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import styleImport from 'vite-plugin-style-import'
-import alias from '@rollup/plugin-alias'
-import ElementPlus from 'unplugin-element-plus/vite'
 
 // https://vitejs.dev/config/
 export default ({ mode }) =>
@@ -12,8 +10,6 @@ export default ({ mode }) =>
     plugins: [
       vue(),
       vueJsx(),
-      alias(),
-      ElementPlus({}),
       styleImport({
         libs: [
           {
