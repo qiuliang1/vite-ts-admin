@@ -6,7 +6,10 @@ import { layoutStore } from '@/store/system/layout'
 export default defineComponent({
   // props: {},
   emits: [],
-  // components: {},
+  components: {
+    ElBreadcrumb,
+    ElBreadcrumbItem
+  },
   setup() {
     const store = layoutStore()
     // store.collapseAction()

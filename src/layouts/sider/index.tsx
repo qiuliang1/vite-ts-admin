@@ -10,7 +10,7 @@ import { AppRouteRecordRaw } from '@/router/types'
 export default defineComponent({
   // props: {},
   emits: [],
-  //   components: {},
+  components: { ElMenu, ElMenuItem, ElSubMenu },
   setup() {
     const store = layoutStore()
     const route = useRoute()

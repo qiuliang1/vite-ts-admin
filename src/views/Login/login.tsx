@@ -10,7 +10,11 @@ interface IUser {
 
 export default defineComponent({
   components: {
-    Icon
+    Icon,
+    ElButton,
+    ElForm,
+    ElFormItem,
+    ElInput
   },
   setup() {
     const data = reactive<{ user: IUser }>({

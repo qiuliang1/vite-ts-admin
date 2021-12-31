@@ -8,7 +8,11 @@ export default defineComponent({
   // props: {},
   //   emits: [],
   components: {
-    PageLayout
+    PageLayout,
+    ElContainer,
+    ElHeader,
+    ElAside,
+    ElMain
   },
   setup() {
     return () => (

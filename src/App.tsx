@@ -6,6 +6,9 @@ import 'element-plus/theme-chalk/index.css'
 import '@/styles/index.scss'
 
 export default defineComponent({
+  component: {
+    ElConfigProvider
+  },
   setup() {
     return () => (
       <ElConfigProvider button={{ autoInsertSpace: true }}>
