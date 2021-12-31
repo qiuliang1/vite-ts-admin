@@ -4,12 +4,12 @@ import Icon from '@/components/Icon'
 import { layoutStore } from '@/store/system/layout'
 
 export default defineComponent({
-  // props: {},
-  emits: [],
   components: {
     ElBreadcrumb,
     ElBreadcrumbItem
   },
+  // props: {},
+  emits: [],
   setup() {
     const store = layoutStore()
     // store.collapseAction()

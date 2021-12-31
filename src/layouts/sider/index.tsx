@@ -8,9 +8,9 @@ import { asyncRoute } from '@/router'
 import { AppRouteRecordRaw } from '@/router/types'
 
 export default defineComponent({
+  components: { ElMenu, ElMenuItem, ElSubMenu },
   // props: {},
   emits: [],
-  components: { ElMenu, ElMenuItem, ElSubMenu },
   setup() {
     const store = layoutStore()
     const route = useRoute()
