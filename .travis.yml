@@ -21,7 +21,7 @@ before_install:
 #   -in id_rsa.enc -out ~\/.ssh/id_rsa -d
 - openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv
   -in deploy_rsa.enc -out deploy_rsa -d
-- chmod 600 ~\/.ssh/authorized_keys
+- chmod 600 ~\/.ssh/deploy_rsa
 - echo -e "Host 101.35.190.75\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 after_success:
 - rsync -az --delete ./dist/* root@101.35.190.75:/home/nginx/www/qx-admin
