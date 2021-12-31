@@ -22,7 +22,6 @@ before_install:
 # - eval "$(ssh-agent -s)"
 - chmod 600 ~\/.ssh/id_rsa # 降低 id_rsa 文件的权限
 - echo -e "Host 101.35.190.75\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config # 将生产服务器地址加入到测试机的信任列表中
-# - chmod 600 .ssh/authorized_keys
 # - ssh-add .ssh/authorized_keys
 after_success:
 -chmod 600 ~/.ssh/authorized_keys
