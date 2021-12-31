@@ -1,10 +1,8 @@
-import { defineComponent, h, PropType } from 'vue'
+import { defineComponent, h } from 'vue'
 import * as IconComponent from '@element-plus/icons'
 import { ElIcon } from 'element-plus'
 
-export function isValidKey (
-  key: string | number | symbol
-): key is keyof typeof IconComponent {
+export function isValidKey(key: string | number | symbol): key is keyof typeof IconComponent {
   return key in IconComponent
 }
 
@@ -22,14 +20,13 @@ export default defineComponent({
       type: String
     }
   },
-  setup (props) {
-    const { size = 14, color = '#999' } = props
-    const iconName = props.iconName as string
+  setup(props) {
+    let iconName = ''
+    iconName = props.iconName as string
+
     return () => (
-      <ElIcon size={size} color={color}>
-        {
-            isValidKey(iconName) && h(IconComponent[iconName])
-        }
+      <ElIcon size={props.size} color={props.color}>
+        {isValidKey(iconName) && h(IconComponent[iconName])}
       </ElIcon>
     )
   }
