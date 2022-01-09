@@ -1,34 +1,30 @@
 import { defineComponent } from 'vue'
-import { ElContainer, ElHeader, ElAside, ElMain } from 'element-plus'
 import Sider from './sider'
 import Header from './header'
 import PageLayout from './page'
+import { layoutStore } from '@/store/system/layout'
 
 export default defineComponent({
   // props: {},
   //   emits: [],
-  components: {
-    PageLayout,
-    ElContainer,
-    ElHeader,
-    ElAside,
-    ElMain
-  },
+  // components: {
+  // },
   setup() {
+    const store = layoutStore()
     return () => (
-      <ElContainer>
-        <ElAside>
+      <a-layout>
+        <a-layout-sider breakpoint="lg" collapsed={store.collapse}>
           <Sider />
-        </ElAside>
-        <ElContainer>
-          <ElHeader>
+        </a-layout-sider>
+        <a-layout>
+          <a-layout-header style={{ background: '#fff', padding: 0 }}>
             <Header></Header>
-          </ElHeader>
-          <ElMain>
+          </a-layout-header>
+          <a-layout-content>
             <PageLayout></PageLayout>
-          </ElMain>
-        </ElContainer>
-      </ElContainer>
+          </a-layout-content>
+        </a-layout>
+      </a-layout>
     )
   }
 })

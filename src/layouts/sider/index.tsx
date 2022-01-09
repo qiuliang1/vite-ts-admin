@@ -1,26 +1,36 @@
-import { defineComponent } from 'vue'
-import { ElMenu, ElMenuItem, ElSubMenu } from 'element-plus'
-import { useRoute } from 'vue-router'
+import { defineComponent, VNodeChild } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 
 import Icon from '@/components/Icon'
 import { layoutStore } from '@/store/system/layout'
 import { asyncRoute } from '@/router'
 import { AppRouteRecordRaw } from '@/router/types'
 
+interface MenuInfo {
+  key: string
+  keyPath: string[]
+  item: VNodeChild
+  domEvent: MouseEvent
+}
+
 export default defineComponent({
-  components: { ElMenu, ElMenuItem, ElSubMenu },
   // props: {},
   emits: [],
   setup() {
     const store = layoutStore()
+    const router = useRouter()
     const route = useRoute()
 
     const menuConfig = {
-      backgroundColor: '#61a1ff',
-      textColor: '#ffffff',
-      activeTextColor: '#000',
-      router: true,
-      defaultActive: route.path
+      theme: 'dark',
+      mode: 'inline',
+      openKeys: [`/${route.path.split('/')[1]}`]
+    }
+
+    const routeTo = ({ key }: MenuInfo) => {
+      router.push({
+        path: key
+      })
     }
 
     const LogoRender = () => {
@@ -37,35 +47,35 @@ export default defineComponent({
         if (v.meta.hideChildrenInMenu && v.children) {
           const child = v.children[0]
           return (
-            <ElMenuItem
-              index={`${v.path}/${child.path}`}
-              v-slots={{ title: () => child.meta.title }}
-            >
-              <Icon iconName="Document" />
-            </ElMenuItem>
+            <a-menu-item key={`${v.path}${child.path}`}>
+              <Icon iconName="icon-yichgangtongji" />
+              <span>{child.meta.title}</span>
+            </a-menu-item>
           )
         } else if (v.children && v.children.length > 0) {
           return (
-            <ElSubMenu
-              index={v.path}
+            <a-sub-menu
+              key={v.path}
               v-slots={{
                 title: () => {
                   return (
                     <>
-                      <Icon iconName="Document" /> {v.meta.title}
+                      <Icon iconName="icon-yuebao" />
+                      <span>{v.meta.title}</span>
                     </>
                   )
                 }
               }}
             >
               {menuHandler(v.children, v.path)}
-            </ElSubMenu>
+            </a-sub-menu>
           )
         } else {
           return (
-            <ElMenuItem index={`${path}/${v.path}`} v-slots={{ title: () => v.meta.title }}>
-              <Icon iconName="Document" />
-            </ElMenuItem>
+            <a-menu-item key={`${path}/${v.path}`}>
+              <Icon iconName="icon-yunweigongsi" />
+              <span>{v.meta.title}</span>
+            </a-menu-item>
           )
         }
       })
@@ -74,9 +84,14 @@ export default defineComponent({
     return () => (
       <>
         <LogoRender />
-        <ElMenu class="el-menu-vertical-custom" collapse={store.collapse} {...menuConfig}>
+        <a-menu
+          class="el-menu-vertical-custom"
+          onClick={routeTo}
+          selectedKeys={[route.path]}
+          {...menuConfig}
+        >
           {menuHandler(asyncRoute, '')}
-        </ElMenu>
+        </a-menu>
       </>
     )
   }
