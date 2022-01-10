@@ -3,7 +3,7 @@ import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import convue from 'convue'
-// import styleImport from 'vite-plugin-style-import'
+import styleImport from 'vite-plugin-style-import'
 import {
   base,
   primaryColor,
@@ -14,8 +14,8 @@ import {
 } from './src/config/constants'
 import vueI18n from '@intlify/vite-plugin-vue-i18n'
 // import AutoImport from 'unplugin-auto-import/vite'
-// import Components from 'unplugin-vue-components/vite'
-// import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/vite'
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
 export default () => {
@@ -25,6 +25,24 @@ export default () => {
     plugins: [
       vue(),
       vueJsx(),
+      Components({
+        resolvers: [AntDesignVueResolver()]
+      }),
+      styleImport({
+        libs: [
+          {
+            libraryName: 'ant-design-vue',
+            esModule: true,
+            ensureStyleFile: true,
+            resolveStyle: (name) => {
+              return `ant-design-vue/lib/${name}/style`
+            },
+            resolveComponent: (name) => {
+              return `ant-design-vue/es/${name}`
+            }
+          }
+        ]
+      }),
       ...convue({
         head: {
           title: 'Vite TSX Admin'

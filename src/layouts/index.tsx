@@ -2,6 +2,7 @@ import { defineComponent } from 'vue'
 import Sider from './sider'
 import Header from './header'
 import PageLayout from './page'
+import { Layout, LayoutSider, LayoutHeader, LayoutContent } from 'ant-design-vue'
 import { layoutStore } from '@/store/system/layout'
 
 export default defineComponent({
@@ -12,19 +13,19 @@ export default defineComponent({
   setup() {
     const store = layoutStore()
     return () => (
-      <a-layout>
-        <a-layout-sider breakpoint="lg" collapsed={store.collapse}>
+      <Layout>
+        <LayoutSider breakpoint="lg" collapsed={store.collapse}>
           <Sider />
-        </a-layout-sider>
-        <a-layout>
-          <a-layout-header style={{ background: '#fff', padding: 0 }}>
+        </LayoutSider>
+        <Layout>
+          <LayoutHeader style={{ background: '#fff', padding: 0 }}>
             <Header></Header>
-          </a-layout-header>
-          <a-layout-content>
+          </LayoutHeader>
+          <LayoutContent>
             <PageLayout></PageLayout>
-          </a-layout-content>
-        </a-layout>
-      </a-layout>
+          </LayoutContent>
+        </Layout>
+      </Layout>
     )
   }
 })

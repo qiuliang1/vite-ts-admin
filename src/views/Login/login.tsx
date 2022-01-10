@@ -1,5 +1,6 @@
 import { defineComponent, ref, reactive, toRaw } from 'vue'
 import { useRouter } from 'vue-router'
+import { Form, FormItem, Input, Button } from 'ant-design-vue'
 import Icon from '@/components/Icon'
 interface IUser {
   username: string
@@ -8,7 +9,11 @@ interface IUser {
 
 export default defineComponent({
   components: {
-    Icon
+    Icon,
+    Form,
+    FormItem,
+    Input,
+    Button
   },
   setup() {
     const modelRef = reactive<IUser>({
@@ -53,11 +58,11 @@ export default defineComponent({
     const resetForm = () => {
       formRef.value.resetFields()
     }
-    function keyup({ code }: KeyboardEvent) {
-      if (code === 'Enter') {
-        login()
-      }
-    }
+    // function keyup({ code }: KeyboardEvent) {
+    //   if (code === 'Enter') {
+    //     login()
+    //   }
+    // }
     const formConfig = {
       labelCol: {
         span: 4
@@ -68,34 +73,33 @@ export default defineComponent({
     }
     return () => (
       <div class="login-wrap">
-        <a-form model={modelRef} ref={formRef} rules={rulesRef} {...formConfig}>
-          <a-form-item label="用户名" name="username">
-            <a-input
+        <Form model={modelRef} ref={formRef} rules={rulesRef} {...formConfig}>
+          <FormItem label="用户名" name="username">
+            <Input
               v-model:value={modelRef.username}
               v-slots={{
                 prefix: () => <Icon iconName="icon-200yonghu_yonghu" />
               }}
             />
-          </a-form-item>
-          <a-form-item label="密 码" name="password">
-            <a-input
+          </FormItem>
+          <FormItem label="密 码" name="password">
+            <Input
               v-model:value={modelRef.password}
               type="password"
-              autocomplete="off"
               v-slots={{
                 prefix: () => <Icon iconName="icon-mima" />
               }}
             />
-          </a-form-item>
-          <a-form-item wrapper-col={{ span: 14, offset: 4 }}>
-            <a-button type="primary" onClick={login} onKeyup={keyup}>
+          </FormItem>
+          <FormItem wrapper-col={{ span: 14, offset: 4 }}>
+            <Button type="primary" onClick={login}>
               登陆
-            </a-button>
-            <a-button style="margin-left: 10px" onClick={resetForm}>
+            </Button>
+            <Button style="margin-left: 10px" onClick={resetForm}>
               Reset
-            </a-button>
-          </a-form-item>
-        </a-form>
+            </Button>
+          </FormItem>
+        </Form>
       </div>
     )
   }
