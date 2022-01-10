@@ -1,6 +1,5 @@
 import { defineComponent, ref, reactive, toRaw } from 'vue'
 import { useRouter } from 'vue-router'
-import { Form, FormItem, Input, Button } from 'ant-design-vue'
 import Icon from '@/components/Icon'
 interface IUser {
   username: string
@@ -9,11 +8,7 @@ interface IUser {
 
 export default defineComponent({
   components: {
-    Icon,
-    Form,
-    FormItem,
-    Input,
-    Button
+    Icon
   },
   setup() {
     const modelRef = reactive<IUser>({
@@ -73,33 +68,33 @@ export default defineComponent({
     }
     return () => (
       <div class="login-wrap">
-        <Form model={modelRef} ref={formRef} rules={rulesRef} {...formConfig}>
-          <FormItem label="用户名" name="username">
-            <Input
+        <a-form model={modelRef} ref={formRef} rules={rulesRef} {...formConfig}>
+          <a-form-item label="用户名" name="username">
+            <a-input
               v-model:value={modelRef.username}
               v-slots={{
                 prefix: () => <Icon iconName="icon-200yonghu_yonghu" />
               }}
             />
-          </FormItem>
-          <FormItem label="密 码" name="password">
-            <Input
+          </a-form-item>
+          <a-form-item label="密 码" name="password">
+            <a-input
               v-model:value={modelRef.password}
               type="password"
               v-slots={{
                 prefix: () => <Icon iconName="icon-mima" />
               }}
             />
-          </FormItem>
-          <FormItem wrapper-col={{ span: 14, offset: 4 }}>
-            <Button type="primary" onClick={login}>
+          </a-form-item>
+          <a-form-item wrapper-col={{ span: 14, offset: 4 }}>
+            <a-button type="primary" onClick={login}>
               登陆
-            </Button>
-            <Button style="margin-left: 10px" onClick={resetForm}>
+            </a-button>
+            <a-button style="margin-left: 10px" onClick={resetForm}>
               Reset
-            </Button>
-          </FormItem>
-        </Form>
+            </a-button>
+          </a-form-item>
+        </a-form>
       </div>
     )
   }

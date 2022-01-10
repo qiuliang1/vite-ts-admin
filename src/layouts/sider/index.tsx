@@ -1,7 +1,6 @@
 import { defineComponent, VNodeChild } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 
-import { Menu, SubMenu, MenuItem } from 'ant-design-vue'
 import Icon from '@/components/Icon'
 import { layoutStore } from '@/store/system/layout'
 import { asyncRoute } from '@/router'
@@ -48,14 +47,14 @@ export default defineComponent({
         if (v.meta.hideChildrenInMenu && v.children) {
           const child = v.children[0]
           return (
-            <MenuItem key={`${v.path}${child.path}`}>
+            <a-menu-item key={`${v.path}${child.path}`}>
               <Icon iconName="icon-yichgangtongji" />
               <span>{child.meta.title}</span>
-            </MenuItem>
+            </a-menu-item>
           )
         } else if (v.children && v.children.length > 0) {
           return (
-            <SubMenu
+            <a-sub-menu
               key={v.path}
               v-slots={{
                 title: () => {
@@ -69,14 +68,14 @@ export default defineComponent({
               }}
             >
               {menuHandler(v.children, v.path)}
-            </SubMenu>
+            </a-sub-menu>
           )
         } else {
           return (
-            <MenuItem key={`${path}/${v.path}`}>
+            <a-menu-item key={`${path}/${v.path}`}>
               <Icon iconName="icon-yunweigongsi" />
               <span>{v.meta.title}</span>
-            </MenuItem>
+            </a-menu-item>
           )
         }
       })
@@ -85,14 +84,14 @@ export default defineComponent({
     return () => (
       <>
         <LogoRender />
-        <Menu
+        <a-menu
           class="el-menu-vertical-custom"
           onClick={routeTo}
           selectedKeys={[route.path]}
           {...menuConfig}
         >
           {menuHandler(asyncRoute, '')}
-        </Menu>
+        </a-menu>
       </>
     )
   }

@@ -1,6 +1,5 @@
 import { defineComponent } from 'vue'
 import { useRoute, RouteRecordName } from 'vue-router'
-import { Breadcrumb, BreadcrumbItem, Menu, MenuItem } from 'ant-design-vue'
 import Icon from '@/components/Icon'
 import { layoutStore } from '@/store/system/layout'
 import { asyncRoute } from '@/router'
@@ -43,28 +42,28 @@ export default defineComponent({
       const child = parentNode.children!
       return (
         <>
-          <BreadcrumbItem
+          <a-breadcrumb-item
             v-slots={{
               overlay: () => {
                 return (
-                  <Menu>
+                  <a-menu>
                     {child.map((v) => {
                       return (
-                        <MenuItem>
+                        <a-menu-item>
                           <router-link to={`${parentNode.path}/${v.path}`}>
                             {v.meta.title}
                           </router-link>
-                        </MenuItem>
+                        </a-menu-item>
                       )
                     })}
-                  </Menu>
+                  </a-menu>
                 )
               }
             }}
           >
             <a>{parentNode.meta.title}</a>
-          </BreadcrumbItem>
-          <BreadcrumbItem>{route.meta.title}</BreadcrumbItem>
+          </a-breadcrumb-item>
+          <a-breadcrumb-item>{route.meta.title}</a-breadcrumb-item>
         </>
       )
     }
@@ -77,7 +76,7 @@ export default defineComponent({
             size={16}
           ></Icon>
         </div>
-        <Breadcrumb>{renderBreadcrumb()}</Breadcrumb>
+        <a-breadcrumb>{renderBreadcrumb()}</a-breadcrumb>
       </>
     )
   }
