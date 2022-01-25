@@ -10,7 +10,7 @@ const IconFont = createFromIconfontCN({
 })
 
 export default defineComponent({
-  name: 'ElIcons',
+  name: 'Icons',
   component: {
     IconFont
   },
@@ -22,7 +22,8 @@ export default defineComponent({
       type: String
     },
     iconName: {
-      type: String
+      type: String,
+      required: true
     }
   },
   setup(props) {
@@ -31,7 +32,7 @@ export default defineComponent({
     watch(props, (newProp) => {
       iconName = newProp.iconName as string
     })
-    if (iconName.includes('icon')) {
+    if (iconName.includes('icon-')) {
       return () => (
         <IconFont type={iconName} style={{ fontSize: props.size + 'px', color: props.color }} />
       )

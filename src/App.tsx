@@ -5,8 +5,6 @@ import zhCN from 'ant-design-vue/es/locale/zh_CN'
 import { useI18n } from 'vue-i18n'
 import { ConfigProvider } from 'ant-design-vue'
 
-import '@/styles/index.scss'
-
 export default defineComponent({
   // component: {
   //   ElConfigProvider

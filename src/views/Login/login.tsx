@@ -1,4 +1,4 @@
-import { defineComponent, ref, reactive, toRaw } from 'vue'
+import { defineComponent, ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { Form, FormItem, Input, Button } from 'ant-design-vue'
 import Icon from '@/components/Icon'
@@ -43,9 +43,8 @@ export default defineComponent({
       formRef.value
         .validate()
         .then(() => {
-          console.log(toRaw(modelRef))
-
           if (modelRef.username === 'admin' && modelRef.password === '123456') {
+            localStorage.setItem('user', JSON.stringify(modelRef))
             router.push({
               name: 'Analysis'
             })

@@ -1,9 +1,15 @@
-@import 'variables';
+// @import 'ant-design-vue/es/style/index.css';
+// @import 'variables';
 
-@import 'reboot';
+// @import 'reboot';
+@import 'ant-design-vue/es/style/index.css';
+// @import 'ant-design-vue/dist/antd.min.css';
+// @import 'ant-design-vue/es/grid/style/index.css';
+// @import 'ant-design-vue/es/dropdown/style/index.css';
 
 @import 'mixin';
+@import 'base';
 
 @import '../views/Login/style';
 
-@import '../layouts/style';
+// @import '../layouts/style';

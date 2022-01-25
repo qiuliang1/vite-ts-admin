@@ -1,11 +1,12 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
+import { router } from '@/router'
 
 interface IUser {
   username: string
   password: string
 }
 
-export const logintStore = defineStore({
+export const loginStore = defineStore({
   id: 'user',
   state: () => ({
     user: {
@@ -19,6 +20,8 @@ export const logintStore = defineStore({
       this.$patch({
         user: { username: '' }
       })
+      localStorage.removeItem('user')
+      router.push('/')
     },
     login(user: IUser) {
       const { username, password } = user
@@ -35,5 +38,5 @@ export const logintStore = defineStore({
 })
 
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(logintStore, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(loginStore, import.meta.hot))
 }

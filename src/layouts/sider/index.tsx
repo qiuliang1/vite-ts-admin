@@ -1,4 +1,4 @@
-import { defineComponent, VNodeChild } from 'vue'
+import { defineComponent, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 
 import { Menu, SubMenu, MenuItem } from 'ant-design-vue'
@@ -6,13 +6,7 @@ import Icon from '@/components/Icon'
 import { layoutStore } from '@/store/system/layout'
 import { asyncRoute } from '@/router'
 import { AppRouteRecordRaw } from '@/router/types'
-
-interface MenuInfo {
-  key: string
-  keyPath: string[]
-  item: VNodeChild
-  domEvent: MouseEvent
-}
+import logo from '@/assets/logo.png'
 
 export default defineComponent({
   // props: {},
@@ -23,22 +17,24 @@ export default defineComponent({
     const route = useRoute()
 
     const menuConfig = {
-      theme: 'dark',
-      mode: 'inline',
       openKeys: [`/${route.path.split('/')[1]}`]
     }
 
-    const routeTo = ({ key }: MenuInfo) => {
+    watch(route, (newV) => {
+      menuConfig.openKeys = [`/${newV.path.split('/')[1]}`]
+    })
+
+    const routeTo = ({ key }: { key: string | number }) => {
       router.push({
-        path: key
+        path: key as string
       })
     }
 
     const LogoRender = () => {
       return (
         <div class="lx-logo">
-          <img class="lx-logo-img" src="https://vvbin.cn/next/assets/logo.63028018.png" />
-          <div class={{ 'lx-logo-title': true, hide: store.collapse }}>LXAdmin</div>
+          <img class="lx-logo-img" src={logo} />
+          <div class={{ 'lx-logo-title': true, hide: store.collapse }}>LX Admin</div>
         </div>
       )
     }
@@ -48,7 +44,7 @@ export default defineComponent({
         if (v.meta.hideChildrenInMenu && v.children) {
           const child = v.children[0]
           return (
-            <MenuItem key={`${v.path}${child.path}`}>
+            <MenuItem key={`${v.path}/${child.path}`}>
               <Icon iconName="icon-yichgangtongji" />
               <span>{child.meta.title}</span>
             </MenuItem>
@@ -86,9 +82,10 @@ export default defineComponent({
       <>
         <LogoRender />
         <Menu
-          class="el-menu-vertical-custom"
           onClick={routeTo}
           selectedKeys={[route.path]}
+          theme="dark"
+          mode="inline"
           {...menuConfig}
         >
           {menuHandler(asyncRoute, '')}
