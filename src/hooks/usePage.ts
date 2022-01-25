@@ -15,7 +15,6 @@ export const useRedo = (_router?: Router) => {
         resolve(false)
         return
       }
-      debugger
       if (name && Object.keys(params).length > 0) {
         params['_redirect_type'] = 'name'
         params['path'] = String(name)
