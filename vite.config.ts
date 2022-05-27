@@ -17,7 +17,7 @@ export default ({ mode }) =>
       port: 8888,
       proxy: {
         '/api': {
-          target: 'https://c4b2e5aa-a74e-49dc-b481-cf1b07c89556.bspapp.com',
+          target: 'http://101.35.190.75:1443/',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, '')
         }
