@@ -73,8 +73,7 @@ export default defineComponent({
         stationCode: '05179998' //站点编号
       }
       const data = await test(query)
-      console.log(data);
-      
+      console.log(data)
     }
     fetchTest()
     // function keyup({ code }: KeyboardEvent) {
