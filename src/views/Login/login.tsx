@@ -92,7 +92,7 @@ export default defineComponent({
     return () => (
       <div class="login-wrap">
         <Form model={modelRef} ref={formRef} rules={rulesRef} {...formConfig}>
-          <FormItem label="用户名" name="username">
+          <FormItem label="用户名1" name="username">
             <Input
               v-model:value={modelRef.username}
               v-slots={{
