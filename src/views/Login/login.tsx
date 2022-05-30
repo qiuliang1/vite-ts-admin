@@ -60,12 +60,12 @@ export default defineComponent({
     }
     async function fetchTest() {
       const query = {
-        pageNum: 1, //请求的页数 （默认为1）
-        pageSize: 20, //每页条数 （默认为20）
-        enterpriseId: 3, //企业编号
-        problemType: '9', //类型编号
-        beginTimestamp: 1653442046511,
-        endTimestamp: 1653442558628
+        // pageNum: 1, //请求的页数 （默认为1）
+        // pageSize: 20, //每页条数 （默认为20）
+        // enterpriseId: 3, //企业编号
+        // problemType: '9', //类型编号
+        // beginTimestamp: 1653442046511,
+        // endTimestamp: 1653442558628
       }
       const data = await test(query)
       console.log(data)

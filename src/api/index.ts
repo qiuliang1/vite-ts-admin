@@ -6,7 +6,7 @@ interface ITest {
 
 export function test(query: ITest): Promise<any> {
   return request({
-    url: '/getXunjianCheck',
+    url: '/api/getXunjianCheck',
     method: 'POST',
     data: query
   })

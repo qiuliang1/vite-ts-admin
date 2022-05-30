@@ -9,7 +9,7 @@ import { message } from 'ant-design-vue'
 // 根据环境不同引入不同api地址
 // import { config } from '@/config'
 const service = axios.create({
-  baseURL: '/api', //config.baseApi, // url = base url + request url
+  baseURL: '/', //config.baseApi, // url = base url + request url
   timeout: 5000,
   withCredentials: false // send cookies when cross-domain requests
   // headers: {
