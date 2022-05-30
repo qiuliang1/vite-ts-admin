@@ -1,16 +1,19 @@
-import { defineComponent, h, PropType } from 'vue'
-import * as IconComponent from '@element-plus/icons'
-import { ElIcon } from 'element-plus'
+import { defineComponent, watch, createVNode } from 'vue'
+import { createFromIconfontCN } from '@ant-design/icons-vue'
+import * as $icon from '@ant-design/icons-vue'
 
-export function isValidKey (
-  key: string | number | symbol
-): key is keyof typeof IconComponent {
-  return key in IconComponent
+export function isValidKey(key: string | number | symbol): key is keyof typeof $icon {
+  return key in $icon
 }
+const IconFont = createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_2039396_4twcccot5mf.js'
+})
 
 export default defineComponent({
-  name: 'ElIcons',
-  //   component: IconComponent,
+  name: 'Icons',
+  component: {
+    IconFont
+  },
   props: {
     size: {
       type: Number
@@ -19,18 +22,23 @@ export default defineComponent({
       type: String
     },
     iconName: {
-      type: String
+      type: String,
+      required: true
     }
   },
-  setup (props) {
-    const { size = 14, color = '#999' } = props
-    const iconName = props.iconName as string
-    return () => (
-      <ElIcon size={size} color={color}>
-        {
-            isValidKey(iconName) && h(IconComponent[iconName])
-        }
-      </ElIcon>
-    )
+  setup(props) {
+    let iconName = ''
+    iconName = props.iconName as string
+    watch(props, (newProp) => {
+      iconName = newProp.iconName as string
+    })
+    if (iconName.includes('icon-')) {
+      return () => (
+        <IconFont type={iconName} style={{ fontSize: props.size + 'px', color: props.color }} />
+      )
+    }
+    return () =>
+      isValidKey(iconName) &&
+      createVNode($icon[iconName], { style: { fontSize: props.size + 'px', color: props.color } })
   }
 })
